@@ -6,13 +6,13 @@ static const Block blocks[] = {
 	/* {"crypto",	0,	13}, */
 	/* {"torrent",	20,	7}, */
 	//{"news",	0,	6},
-	{"internet",	6,	4},
+	{"internet",	8,	4},
 	{"memory",	3,	14},
 	{"cpu",		3,	13},
 	{"lang",	0,	10},
 	{"volume",	0,	10},
 	{"bluetooth",	0,	5},
-	{"battery",	5,	3},
+	{"battery",	30,	3},
 	{"clock",	60,	1},
 	{"help-icon",	0,	15},
 };
