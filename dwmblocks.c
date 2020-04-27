@@ -8,6 +8,7 @@
 #define CMDLENGTH		50
 
 typedef struct {
+	char* icon;
 	char* command;
 	unsigned int interval;
 	unsigned int signal;
@@ -15,6 +16,7 @@ typedef struct {
 void sighandler(int num);
 void buttonhandler(int sig, siginfo_t *si, void *ucontext);
 void replace(char *str, char old, char new);
+void remove_all(char *str, char to_remove);
 void getcmds(int time);
 #ifndef __OpenBSD__
 void getsigcmds(int signal);
@@ -47,6 +49,19 @@ void replace(char *str, char old, char new)
 			str[i] = new;
 }
 
+void remove_all(char *str, char to_remove) {
+	char *read = str;
+	char *write = str;
+	while (*read) {
+		if (*read == to_remove) {
+			read++;
+			*write = *read;
+		}
+		read++;
+		write++;
+	}
+}
+
 //opens process *cmd and stores output in *output
 void getcmd(const Block *block, char *output)
 {
@@ -55,6 +70,7 @@ void getcmd(const Block *block, char *output)
 		output[0] = block->signal;
 		output++;
 	}
+	strcpy(output, block->icon);
 	char* cmd;
 	FILE *cmdf;
 	if (button)
@@ -72,8 +88,11 @@ void getcmd(const Block *block, char *output)
 	}
 	if (!cmdf)
 		return;
-	fgets(output, CMDLENGTH, cmdf);
-	int i = strlen(output);
+	char c;
+	int i = strlen(block->icon);
+	fgets(output+i, CMDLENGTH-i, cmdf);
+	remove_all(output, '\n');
+	i = strlen(output);
 	if (delim != '\0' && i)
 		output[i++] = delim;
 	output[i++] = '\0';
