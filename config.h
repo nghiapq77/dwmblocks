@@ -2,9 +2,10 @@
 static const Block blocks[] = {
 	/*Icon*/ /*Command*/	/*Update Interval*/	/*Update Signal*/
 	{"",     "internet",	6,	                4},
+	{"",     "bluetooth",	10,	                5},
 	{"",     "memory",	3,	                14},
 	{"",     "cpu",		3,	                13},
-	{"",     "bluetooth",	0,	                5},
+        {"",	 "mailbox",	180,	                12},
 	{"",     "lang",	0,	                11},
 	{"",     "volume",	0,	                10},
 	{"",     "battery",	30,	                3},
